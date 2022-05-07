@@ -49,15 +49,18 @@ def numerical_gradient(f, x):
 
     # numpy size는 원소 수를 반환함
     for i in range(x.size):
-        pivot_x = x[i]
+        origin_x = x[i]
 
         # f(x+h) 함수 계산
-        fxh1 = f(pivot_x + h)
+        x[i] = origin_x + h
+        fxh1 = f(x)
 
         # f(x-h) 함수 계산
-        fxh2 = f(pivot_x - h)
+        x[i] = origin_x - h
+        fxh2 = f(x)
 
         gradient[i] = (fxh1 - fxh2) / (2 * h)  # 중앙 차분
+        x[i] = origin_x  # 값 복원
 
     return gradient.reshape(shape)  # 차원 복원
 

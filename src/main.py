@@ -78,13 +78,13 @@ train_size = train_img.shape[0]
 batch_size = 50
 
 # 학습률
-learning_rate = 0.5
+learning_rate = 0.1
 
 # 입력 크기
 input_size = int(data_option['width'] * data_option['height'])
 
 # 은닉층 크기
-hidden_size = 50
+hidden_size = 80
 
 # 출력 크기
 output_size = get_num_of_classification(data_option)
