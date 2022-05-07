@@ -53,16 +53,27 @@ def numerical_gradient(f, x):
 
         # f(x+h) 함수 계산
         x[i] = origin_x + h
-        fxh1 = f(x.reshape(shape))
+        x = x.reshape(shape)
+        fxh1 = f()
+
+        x = x.reshape(-1)
 
         # f(x-h) 함수 계산
         x[i] = origin_x - h
-        fxh2 = f(x.reshape(shape))
+        x = x.reshape(shape)
+        fxh2 = f()
+
+        # 값 복원
+        x = x.reshape(-1)
+        x[i] = origin_x
 
         gradient[i] = (fxh1 - fxh2) / (2 * h)  # 중앙 차분
-        x[i] = origin_x  # 값 복원
 
-    return gradient.reshape(shape)  # 차원 복원
+    # 차원 복원
+    x = x.reshape(shape)
+    gradient = gradient.reshape(shape)
+
+    return gradient
 
 
 class Network:
@@ -132,7 +143,9 @@ class Network:
         x: 입력 데이터
         answer_label: 정답 레이블
         '''
-        def loss(_): return self.loss(x, answer_label)
+
+        def loss(): return self.loss(x, answer_label)
+
         gradient = {}
 
         gradient['W1'] = numerical_gradient(loss, self.params['W1'])
