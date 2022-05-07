@@ -47,15 +47,15 @@ def numerical_gradient(f, x):
     # x와 형상이 같음
     gradient = np.zeros_like(x)
 
-    # numpy size는 원소 수를 반환함 (차원 상관 없이 반복 가능)
+    # numpy size는 원소 수를 반환함
     for i in range(x.size):
-        pivot_value = x[i]
+        pivot_x = x[i]
 
         # f(x+h) 함수 계산
-        fxh1 = f(pivot_value + h)
+        fxh1 = f(pivot_x + h)
 
         # f(x-h) 함수 계산
-        fxh2 = f(pivot_value - h)
+        fxh2 = f(pivot_x - h)
 
         gradient[i] = (fxh1 - fxh2) / (2 * h)  # 중앙 차분
 
@@ -122,7 +122,7 @@ class Network:
         y = np.argmax(y, axis=1)
         answer_label = np.argmax(answer_label, axis=1)
 
-        return np.sum(y == answer_label) / float(x.shape[0])
+        return np.sum(y == answer_label) / x.shape[0]
 
     def numerical_gradient(self, x, answer_label):
         '''

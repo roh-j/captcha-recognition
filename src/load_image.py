@@ -33,13 +33,13 @@ def load_image(data_option):
             count, int(count * data_option['validation_ratio']))
 
         for i in range(count):
-            img_src = 'dataset/img/' + key + '/' + str(i + 1) + '.png'
+            img_src = 'dataset/img/' + key + '/' + str(i) + '.jpg'
 
-            # 28 x 28 크기 이미지를 Gray Scale로 가져옴
+            # width x height 크기 이미지를 Grayscale로 가져옴
             img = cv2.imread(img_src, cv2.IMREAD_GRAYSCALE)
 
             # 2차원 행렬을 1차원으로 변경
-            # (28, 28) => (784, )
+            # e.g. (28, 28) => (784, )
             img = img.reshape(-1)
 
             target = np.zeros(num_of_classification, dtype=int)
