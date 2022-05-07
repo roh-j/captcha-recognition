@@ -6,7 +6,7 @@ import numpy as np
 data_option = OrderedDict({
     'width': 28,
     'height': 28,
-    'validation_ratio': 0.5,
+    'validation_ratio': 0,
     'classification': {
         '0': {
             'count': 2
@@ -24,13 +24,13 @@ data_option = OrderedDict({
 loss_history = []
 
 # 반복 횟수
-iters_num = 1000
+iters_num = 10
 
 # 학습용 데이터 개수
 train_size = train_img.shape[0]
 
 # 미니배치 크기
-batch_size = 100
+batch_size = 1
 
 # 학습률
 learning_rate = 0.1
@@ -68,3 +68,7 @@ def training():
         # 결과 기록
         loss = network.loss(batch_img, batch_label)
         loss_history.append(loss)
+
+
+if __name__ == '__main__':
+    training()
