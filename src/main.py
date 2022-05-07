@@ -6,22 +6,19 @@ import numpy as np
 data_option = OrderedDict({
     'width': 28,
     'height': 28,
-    'validation_ratio': 0,
+    'validation_ratio': 0.1,
     'classification': {
         '0': {
-            'count': 2
+            'count': 100
         },
         '1': {
-            'count': 2
+            'count': 100
         }
     }
 })
 
 # 데이터 로드
 (train_img, train_label), (test_img, test_label) = load_image(data_option)
-
-# 손실 값 추이
-loss_history = []
 
 # 반복 횟수
 iters_num = 10
@@ -30,7 +27,7 @@ iters_num = 10
 train_size = train_img.shape[0]
 
 # 미니배치 크기
-batch_size = 1
+batch_size = 10
 
 # 학습률
 learning_rate = 0.1
@@ -52,11 +49,13 @@ def training():
     print('Number of Data : ' + str(get_total(data_option)))
 
     for i in range(iters_num):
+        print('iteration : ' + str(i + 1) + ' / ' + str(iters_num))
+
         # 미니배치
         batch_mask = np.random.choice(train_size, batch_size)
 
         batch_img = train_img[batch_mask]
-        batch_label = train_img[batch_mask]
+        batch_label = train_label[batch_mask]
 
         # 기울기 계산
         gradient = network.numerical_gradient(batch_img, batch_label)
@@ -67,7 +66,10 @@ def training():
 
         # 결과 기록
         loss = network.loss(batch_img, batch_label)
-        loss_history.append(loss)
+        print('Loss : ' + str(loss))
+
+        accuracy = network.accuracy(batch_img, batch_label)
+        print('Accuracy : ' + str(accuracy) + '%')
 
 
 if __name__ == '__main__':

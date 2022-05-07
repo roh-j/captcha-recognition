@@ -29,7 +29,7 @@ def mean_squared_error(predict_label, answer_label):
 
     # predict_label: softmax 결과값으로 0 ~ 1로 정규화된 값
     # answer_label: 정답 레이블 값으로 one-hot 인코딩이 되어 있음
-    return 0.5 * np.sum((answer_label - predict_label) ** 2)
+    return 0.5 * np.sum((predict_label - answer_label)**2)
 
 
 def numerical_gradient(f, x):
@@ -39,6 +39,9 @@ def numerical_gradient(f, x):
     '''
 
     h = 1e-4  # 0.0001
+
+    shape = x.shape
+    x = x.reshape(-1)  # 1차원으로 변경
 
     # 각 x에 대한 편미분 값
     # x와 형상이 같음
@@ -56,7 +59,7 @@ def numerical_gradient(f, x):
 
         gradient[i] = (fxh1 - fxh2) / (2 * h)  # 중앙 차분
 
-    return gradient
+    return gradient.reshape(shape)  # 차원 복원
 
 
 class Network:
