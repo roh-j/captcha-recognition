@@ -53,11 +53,11 @@ def numerical_gradient(f, x):
 
         # f(x+h) 함수 계산
         x[i] = origin_x + h
-        fxh1 = f(x)
+        fxh1 = f(x.reshape(shape))
 
         # f(x-h) 함수 계산
         x[i] = origin_x - h
-        fxh2 = f(x)
+        fxh2 = f(x.reshape(shape))
 
         gradient[i] = (fxh1 - fxh2) / (2 * h)  # 중앙 차분
         x[i] = origin_x  # 값 복원

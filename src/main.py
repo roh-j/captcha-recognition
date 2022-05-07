@@ -80,13 +80,13 @@ batch_size = 50
 # 학습률
 learning_rate = 0.1
 
-# 입력 크기
+# 입력층 크기
 input_size = int(data_option['width'] * data_option['height'])
 
 # 은닉층 크기
-hidden_size = 80
+hidden_size = 60
 
-# 출력 크기
+# 출력층 크기
 output_size = get_num_of_classification(data_option)
 
 # 신경망 객체 생성
@@ -101,7 +101,7 @@ iters_num = iter_per_epoch * 5
 
 def training():
     print('===== ===== ===== =====')
-    print('Number of Data : ' + str(get_total(data_option)))
+    print('Number of data : ' + str(get_total(data_option)))
     print('Shape of train_img : ' + str(train_img.shape))
     print('Shape of train_label : ' + str(train_label.shape))
     print('Shape of test_img : ' + str(test_img.shape))
@@ -113,8 +113,8 @@ def training():
     file_name = str(date.today()) + '_' + str(int(time.time())) + '.json'
 
     for i in range(iters_num):
-        print('iteration : ' + str(i + 1) + ' / ' + str(iters_num))
-        print('epoch : ' + str(epoch) + ' / ' + str(total_epoch))
+        print('Iteration : ' + str(i + 1) + ' / ' + str(iters_num))
+        print('Epoch : ' + str(epoch) + ' / ' + str(total_epoch))
 
         params_to_json = {}
 
