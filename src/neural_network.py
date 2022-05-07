@@ -32,7 +32,7 @@ def mean_squared_error(predict_label, answer_label):
     return 0.5 * np.sum((predict_label - answer_label)**2)
 
 
-def numerical_gradient(f, x):
+def numerical_gradient(loss, x):
     '''
     편미분 함수 (수치 미분으로 근사)
     오차를 줄이기 위해 중앙 차분 연산
@@ -40,6 +40,7 @@ def numerical_gradient(f, x):
 
     h = 1e-4  # 0.0001
 
+    # x가 참조 하고 있는 numpy 배열은 shape 변하지 않음
     shape = x.shape
     x = x.reshape(-1)  # 1차원으로 변경
 
@@ -53,24 +54,18 @@ def numerical_gradient(f, x):
 
         # f(x+h) 함수 계산
         x[i] = origin_x + h
-        x = x.reshape(shape)
-        fxh1 = f()
-
-        x = x.reshape(-1)
+        fxh1 = loss()
 
         # f(x-h) 함수 계산
         x[i] = origin_x - h
-        x = x.reshape(shape)
-        fxh2 = f()
+        fxh2 = loss()
 
         # 값 복원
-        x = x.reshape(-1)
         x[i] = origin_x
 
         gradient[i] = (fxh1 - fxh2) / (2 * h)  # 중앙 차분
 
     # 차원 복원
-    x = x.reshape(shape)
     gradient = gradient.reshape(shape)
 
     return gradient
