@@ -9,7 +9,7 @@ import time
 data_option = OrderedDict({
     'width': 45,
     'height': 45,
-    'validation_ratio': 0.1,
+    'validation_ratio': 0.2,
     'classification': {
         'A': {
             'count': 35
@@ -78,7 +78,7 @@ train_size = train_img.shape[0]
 batch_size = 50
 
 # 학습률
-learning_rate = 0.1
+learning_rate = 0.5
 
 # 입력 크기
 input_size = int(data_option['width'] * data_option['height'])
@@ -141,15 +141,18 @@ def training():
         loss = network.loss(batch_img, batch_label)
         print('Loss : ' + str(loss))
 
-        train_accuracy = network.accuracy(batch_img, batch_label)
-        print('Accuracy : ' + str(train_accuracy * 100) + '%')
+        batch_accuracy = network.accuracy(batch_img, batch_label)
+        print('Batch Accuracy : ' + str(batch_accuracy * 100) + '%')
 
         # 1 epoch당 정확도 계산
-        if (i % iter_per_epoch == 0):
-            test_accuracy = network.accuracy(test_img, test_label)
-
+        if ((i + 1) % iter_per_epoch == 0):
             print(str(epoch) + ' epoch is over!')
-            print('Validation Accuracy : ' + str(test_accuracy * 100) + '%')
+
+            train_accuracy = network.accuracy(train_img, train_label)
+            print('Train Accuracy : ' + str(train_accuracy * 100) + '%')
+
+            test_accuracy = network.accuracy(test_img, test_label)
+            print('Test Accuracy : ' + str(test_accuracy * 100) + '%')
 
             epoch += 1
 
