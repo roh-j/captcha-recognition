@@ -89,17 +89,18 @@ hidden_size = 60
 # 출력층 크기
 output_size = get_num_of_classification(data_option)
 
-# 신경망 객체 생성
-network = Network(input_size, hidden_size, output_size)
-
 # 1 에폭당 반복 수
 iter_per_epoch = int(max(train_size / batch_size, 1))
 
 # 반복 횟수
-iters_num = iter_per_epoch * 5
+# e.g. 5 => 5 epoch 진행
+iters_num = 5
 
 
 def training():
+    # 신경망 객체 생성
+    network = Network(input_size, hidden_size, output_size)
+
     print('===== ===== ===== =====')
     print('Number of data : ' + str(get_total(data_option)))
     print('Shape of train_img : ' + str(train_img.shape))
@@ -109,14 +110,23 @@ def training():
     print('===== ===== ===== =====')
 
     epoch = 1
-    total_epoch = int(iters_num / iter_per_epoch)
+    iters_total = iter_per_epoch * iters_num
+
+    # 결과 저장
     file_name = str(date.today()) + '_' + str(int(time.time())) + '.json'
 
-    for i in range(iters_num):
-        print('Iteration : ' + str(i + 1) + ' / ' + str(iters_num))
-        print('Epoch : ' + str(epoch) + ' / ' + str(total_epoch))
+    for i in range(iters_total):
+        print('Iteration : ' + str(i + 1) + ' / ' + str(iters_total))
+        print('Epoch : ' + str(epoch) + ' / ' + str(iters_num))
 
-        params_to_json = {}
+        params_to_json = {
+            'batch_size': batch_size,
+            'learning_rate': learning_rate,
+            'iters_num': iters_num,
+            'input_size': input_size,
+            'hidden_size': hidden_size,
+            'output_size': output_size,
+        }
 
         # 미니배치
         batch_mask = np.random.choice(train_size, batch_size)
