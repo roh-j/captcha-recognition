@@ -75,16 +75,16 @@ data_option = OrderedDict({
 train_size = train_img.shape[0]
 
 # 미니배치 크기
-batch_size = 50
+batch_size = 100
 
 # 학습률
-learning_rate = 0.1
+learning_rate = 0.05
 
 # 입력층 크기
 input_size = int(data_option['width'] * data_option['height'])
 
 # 은닉층 크기
-hidden_size = 60
+hidden_size = 50
 
 # 출력층 크기
 output_size = get_num_of_classification(data_option)
@@ -101,13 +101,13 @@ def training():
     # 신경망 객체 생성
     network = Network(input_size, hidden_size, output_size)
 
-    print('===== ===== ===== =====')
-    print('Number of data : ' + str(get_total(data_option)))
-    print('Shape of train_img : ' + str(train_img.shape))
-    print('Shape of train_label : ' + str(train_label.shape))
-    print('Shape of test_img : ' + str(test_img.shape))
-    print('Shape of test_label : ' + str(test_label.shape))
-    print('===== ===== ===== =====')
+    print('===== ===== ===== =====', flush=True)
+    print('Number of data : ' + str(get_total(data_option)), flush=True)
+    print('Shape of train_img : ' + str(train_img.shape), flush=True)
+    print('Shape of train_label : ' + str(train_label.shape), flush=True)
+    print('Shape of test_img : ' + str(test_img.shape), flush=True)
+    print('Shape of test_label : ' + str(test_label.shape), flush=True)
+    print('===== ===== ===== =====', flush=True)
 
     epoch = 1
     iters_total = iter_per_epoch * iters_num
@@ -116,8 +116,9 @@ def training():
     file_name = str(date.today()) + '_' + str(int(time.time())) + '.json'
 
     for i in range(iters_total):
-        print('Iteration : ' + str(i + 1) + ' / ' + str(iters_total))
-        print('Epoch : ' + str(epoch) + ' / ' + str(iters_num))
+        print('Iteration : ' + str(i + 1) +
+              ' / ' + str(iters_total), flush=True)
+        print('Epoch : ' + str(epoch) + ' / ' + str(iters_num), flush=True)
 
         params_to_json = {
             'batch_size': batch_size,
@@ -149,24 +150,25 @@ def training():
 
         # 결과 기록
         loss = network.loss(batch_img, batch_label)
-        print('Loss : ' + str(loss))
+        print('Loss : ' + str(loss), flush=True)
 
         batch_accuracy = network.accuracy(batch_img, batch_label)
-        print('Batch Accuracy : ' + str(batch_accuracy * 100) + '%')
+        print('Batch Accuracy : ' + str(batch_accuracy * 100) + '%', flush=True)
 
         # 1 epoch당 정확도 계산
         if ((i + 1) % iter_per_epoch == 0):
-            print(str(epoch) + ' epoch is over!')
+            print(str(epoch) + ' epoch is over!', flush=True)
 
             train_accuracy = network.accuracy(train_img, train_label)
-            print('Train Accuracy : ' + str(train_accuracy * 100) + '%')
+            print('Train Accuracy : ' +
+                  str(train_accuracy * 100) + '%', flush=True)
 
             test_accuracy = network.accuracy(test_img, test_label)
-            print('Test Accuracy : ' + str(test_accuracy * 100) + '%')
+            print('Test Accuracy : ' + str(test_accuracy * 100) + '%', flush=True)
 
             epoch += 1
 
-        print('===== ===== ===== =====')
+        print('===== ===== ===== =====', flush=True)
 
 
 if __name__ == '__main__':
