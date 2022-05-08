@@ -12,58 +12,58 @@ data_option = OrderedDict({
     'validation_ratio': 0.2,
     'classification': {
         'A': {
-            'count': 35
+            'count': 945
         },
         'B': {
-            'count': 22
+            'count': 880
         },
         'C': {
-            'count': 31
+            'count': 883
         },
         'D': {
-            'count': 32
+            'count': 854
         },
         'E': {
-            'count': 41
+            'count': 896
         },
         'K': {
-            'count': 44
+            'count': 922
         },
         'L': {
-            'count': 44
+            'count': 900
         },
         'M': {
-            'count': 35
+            'count': 905
         },
         'N': {
-            'count': 41
+            'count': 891
         },
         'P': {
-            'count': 27
+            'count': 903
         },
         'Q': {
-            'count': 32
+            'count': 894
         },
         'R': {
-            'count': 37
+            'count': 921
         },
         'S': {
-            'count': 24
+            'count': 877
         },
         'T': {
-            'count': 29
+            'count': 860
         },
         'U': {
-            'count': 22
+            'count': 855
         },
         'W': {
-            'count': 30
+            'count': 899
         },
         'X': {
-            'count': 31
+            'count': 945
         },
         'Z': {
-            'count': 43
+            'count': 904
         }
     }
 })
@@ -94,7 +94,7 @@ iter_per_epoch = int(max(train_size / batch_size, 1))
 
 # 반복 횟수
 # e.g. 5 => 5 epoch 진행
-iters_num = 5
+iters_num = 10
 
 
 def training():
