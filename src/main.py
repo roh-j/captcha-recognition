@@ -2,7 +2,7 @@ from load_image import load_image, get_total, get_num_of_classification
 from collections import OrderedDict
 from neural_network import Network
 from datetime import date
-import numpy as np
+import cupy as np
 import json
 import time
 
@@ -75,7 +75,7 @@ data_option = OrderedDict({
 train_size = train_img.shape[0]
 
 # 미니배치 크기
-batch_size = 100
+batch_size = 1000
 
 # 학습률
 learning_rate = 0.05
@@ -84,7 +84,7 @@ learning_rate = 0.05
 input_size = int(data_option['width'] * data_option['height'])
 
 # 은닉층 크기
-hidden_size = 50
+hidden_size = 130
 
 # 출력층 크기
 output_size = get_num_of_classification(data_option)
