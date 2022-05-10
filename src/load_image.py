@@ -1,5 +1,5 @@
 import cv2
-import numpy as np
+import cupy as np
 
 
 def load_image(data_option):
