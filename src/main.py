@@ -78,13 +78,13 @@ train_size = train_img.shape[0]
 batch_size = 1000
 
 # 학습률
-learning_rate = 0.05
+learning_rate = 0.1
 
 # 입력층 크기
 input_size = int(data_option['width'] * data_option['height'])
 
 # 은닉층 크기
-hidden_size = 130
+hidden_size = 100
 
 # 출력층 크기
 output_size = get_num_of_classification(data_option)
@@ -94,7 +94,7 @@ iter_per_epoch = int(max(train_size / batch_size, 1))
 
 # 반복 횟수
 # e.g. 5 => 5 epoch 진행
-iters_num = 10
+iters_num = 5
 
 
 def training():
