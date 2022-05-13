@@ -105,7 +105,7 @@ def training():
     network = Network(input_size, hidden_size, output_size)
 
     # 데이터 불러오기 (Continue)
-    network.load('result/2022-05-12_1652358888.json')
+    network.load('result/weight/2022-05-12_1652358888.json')
 
     print('===== ===== ===== =====', flush=True)
     print('Number of data : ' + str(get_total(data_option)), flush=True)
@@ -150,7 +150,7 @@ def training():
             params_to_json[key] = network.params[key].tolist()
 
         # 학습 결과 저장
-        with open('result/' + file_name, 'w') as file:
+        with open('result/weight/' + file_name, 'w') as file:
             learned_params = json.dumps(params_to_json, indent=4)
             file.write(learned_params)
 
