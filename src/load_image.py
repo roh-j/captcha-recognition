@@ -1,5 +1,6 @@
 import cv2
 import cupy as np
+import pickle
 
 
 def load_image(data_option):
@@ -56,6 +57,22 @@ def load_image(data_option):
                 train_img = np.append(train_img, np.array([img]), axis=0)
                 train_label = np.append(
                     train_label, np.array([target]), axis=0)
+
+    return [(train_img, train_label), (test_img, test_label)]
+
+
+def load_pickle():
+    with open('dataset/pickle/train_img.pickle', 'rb') as f:
+        train_img = pickle.load(f)
+
+    with open('dataset/pickle/train_label.pickle', 'rb') as f:
+        train_label = pickle.load(f)
+
+    with open('dataset/pickle/test_img.pickle', 'rb') as f:
+        test_img = pickle.load(f)
+
+    with open('dataset/pickle/test_label.pickle', 'rb') as f:
+        test_label = pickle.load(f)
 
     return [(train_img, train_label), (test_img, test_label)]
 

@@ -1,4 +1,5 @@
 import cupy as np
+import json
 
 
 def sigmoid(x):
@@ -93,6 +94,16 @@ class Network:
         self.params['W2'] = weight_init_std * \
             np.random.randn(hidden_size, output_size)
         self.params['b2'] = np.zeros(output_size)
+
+    def load(self, src):
+        with open(src, 'r') as f:
+            data = json.load(f)
+
+            self.params['W1'] = np.array(data['W1'])
+            self.params['b1'] = np.array(data['b1'])
+
+            self.params['W2'] = np.array(data['W2'])
+            self.params['b2'] = np.array(data['b2'])
 
     def predict(self, x):
         '''
