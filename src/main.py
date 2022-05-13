@@ -1,4 +1,4 @@
-from load_image import load_image, get_total, get_num_of_classification
+from load_image import load_image, get_total, get_num_of_classification, load_pickle
 from collections import OrderedDict
 from neural_network import Network
 from datetime import date
@@ -68,8 +68,11 @@ data_option = OrderedDict({
     }
 })
 
-# 데이터 로드
-(train_img, train_label), (test_img, test_label) = load_image(data_option)
+# 이미지 데이터 로드
+# (train_img, train_label), (test_img, test_label) = load_image(data_option)
+
+# Pickle 데이터 로드 (Continue)
+(train_img, train_label), (test_img, test_label) = load_pickle()
 
 # 학습용 데이터 개수
 train_size = train_img.shape[0]
@@ -100,6 +103,9 @@ iters_num = 5
 def training():
     # 신경망 객체 생성
     network = Network(input_size, hidden_size, output_size)
+
+    # 데이터 불러오기 (Continue)
+    network.load('result/2022-05-12_1652358888.json')
 
     print('===== ===== ===== =====', flush=True)
     print('Number of data : ' + str(get_total(data_option)), flush=True)
