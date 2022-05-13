@@ -2,7 +2,7 @@ from load_image import load_image, get_total, get_num_of_classification, load_pi
 from collections import OrderedDict
 from neural_network import Network
 from datetime import date
-import cupy as np
+import numpy as np
 import json
 import time
 
