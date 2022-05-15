@@ -1,4 +1,4 @@
-from load_image import load_image, get_total, get_num_of_classification, load_pickle
+from load_image import get_total, get_num_of_classification, load_pickle
 from collections import OrderedDict
 from neural_network import Network
 from datetime import date
@@ -71,17 +71,17 @@ data_option = OrderedDict({
 # 이미지 데이터 로드
 # (train_img, train_label), (test_img, test_label) = load_image(data_option)
 
-# Pickle 데이터 로드 (Continue)
+# Pickle 데이터 로드
 (train_img, train_label), (test_img, test_label) = load_pickle()
 
 # 학습용 데이터 개수
 train_size = train_img.shape[0]
 
 # 미니배치 크기
-batch_size = 1000
+batch_size = 200
 
 # 학습률
-learning_rate = 0.1
+learning_rate = 0.05
 
 # 입력층 크기
 input_size = int(data_option['width'] * data_option['height'])
@@ -97,15 +97,12 @@ iter_per_epoch = int(max(train_size / batch_size, 1))
 
 # 반복 횟수
 # e.g. 5 => 5 epoch 진행
-iters_num = 5
+iters_num = 10
 
 
 def training():
     # 신경망 객체 생성
     network = Network(input_size, hidden_size, output_size)
-
-    # 데이터 불러오기 (Continue)
-    network.load('result/weight/2022-05-12_1652358888.json')
 
     print('===== ===== ===== =====', flush=True)
     print('Number of data : ' + str(get_total(data_option)), flush=True)
@@ -150,7 +147,7 @@ def training():
             params_to_json[key] = network.params[key].tolist()
 
         # 학습 결과 저장
-        with open('result/weight/' + file_name, 'w') as file:
+        with open('result/network/' + file_name, 'w') as file:
             learned_params = json.dumps(params_to_json, indent=4)
             file.write(learned_params)
 

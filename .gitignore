@@ -1,5 +1,6 @@
+log.txt
+
 __pycache__/
 dataset/img/
 dataset/pickle/
-result/weight/
-log.txt
+result/network/
