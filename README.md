@@ -3,5 +3,5 @@
 ### 실행
 
 ```
-python ./src/main.py >> log.txt
+python -u ./src/main.py >> log.txt
 ```
