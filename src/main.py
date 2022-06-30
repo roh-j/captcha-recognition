@@ -1,4 +1,4 @@
-from load_image import get_total, get_num_of_classification, load_pickle
+from load_image import get_total, get_num_of_classification, load_image, load_pickle
 from collections import OrderedDict
 from neural_network import Network
 from datetime import datetime
@@ -68,10 +68,10 @@ data_option = OrderedDict({
 })
 
 # 이미지 데이터 로드
-# (train_img, train_label), (test_img, test_label) = load_image(data_option)
+(train_img, train_label), (test_img, test_label) = load_image(data_option)
 
 # Pickle 데이터 로드
-(train_img, train_label), (test_img, test_label) = load_pickle()
+# (train_img, train_label), (test_img, test_label) = load_pickle()
 
 # 학습용 데이터 개수
 train_size = train_img.shape[0]
